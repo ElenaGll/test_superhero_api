@@ -1,0 +1,63 @@
+1. При создании нового героя параметр "phone" остается со значением "null".
+
+    Выполнить запрос
+        requests.post('https://superhero.qa-test.csssr.com/superheroes', data=data,
+                                 headers={"Content-Type": "application/json" })
+    с данными
+        {
+          "fullName": "Dr Pepper",
+          "birthDate": "2020-02-22",
+          "city": "New York",
+          "mainSkill": "Soda",
+          "gender": "M",
+          "phone": "+79456675588"
+        }
+
+    в итоге получается JSON с новым героем, у которого значение "phone" осталось "null".
+
+2. При создании нового героя без параметра "mainSkill" код ответа = 500.
+
+    Выполнить запрос
+        requests.post('https://superhero.qa-test.csssr.com/superheroes', data=data_as_json,
+                                 headers={"Content-Type": "application/json" })
+
+    пропустить параметр "mainSkill" в данных
+        {
+          "fullName": "Thor",
+          "birthDate": "2020-02-22",
+          "city": "New York",
+          "gender": "M",
+          "phone": "+79456675588"
+        }
+
+    выдаст ошибку с кодом 500.
+    Если пропустить другие поля, будет ошибка с кодом 403 и логичным ответом
+        {"message":"Incorrect request data","code":"BAD_REQUEST"}
+
+3. Герой удаляется только после повторного вызова метода delete.
+
+    Создать героя
+        requests.post('https://superhero.qa-test.csssr.com/superheroes', data=data_as_json,
+                                 headers={"Content-Type": "application/json" })
+    с данными
+        data = {
+            "fullName": "Dr Pepper",
+            "birthDate": "2020-02-22",
+            "city": "New York",
+            "mainSkill": "Soda",
+            "gender": "M",
+            "phone": "+79456675588"
+        }
+
+    Посмотреть его id, сделав запрос
+        requests.get("https://superhero.qa-test.csssr.com/superheroes")
+
+    Удалить этого героя
+        requests.delete(f"https://superhero.qa-test.csssr.com/superheroes/{id_of_hero}")
+
+    Сделать запрос героя по его id
+        requests.get("https://superhero.qa-test.csssr.com/superheroes/{id_of_hero}")
+    выдаст код ответа 200 и данные этого героя.
+
+    При повторном вызове метода delete данный герой удалится: при запросе по id будет получен
+     код ответа 400 и сообщение, что такого героя нет.
