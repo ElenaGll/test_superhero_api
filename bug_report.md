@@ -181,13 +181,13 @@
       <td>Expected result</td>
       <td>{id} - ID из п.2 в Steps to reproduce.<br>
         {<br>
-        "id":{id},
-        "fullName":"Dragon",
-        "birthDate":"2020-02-22",
-        "city":"New York",
-        "mainSkill":"Soda",
-        "gender":"M",
-        "phone":"+79456675588"
+        "id":{id},<br>
+        "fullName":"Dragon",<br>
+        "birthDate":"2020-02-22",<br>
+        "city":"New York",<br>
+        "mainSkill":"Soda",<br>
+        "gender":"M",<br>
+        "phone":"+79456675588"<br>
         }
       </td>
     </tr>
